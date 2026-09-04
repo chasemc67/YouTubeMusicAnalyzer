@@ -9,6 +9,7 @@ A small native macOS utility that downloads one YouTube video as an MP3 and esti
 - Downloads only the URL you paste, never its surrounding playlist
 - High-quality MP3 conversion with embedded metadata and thumbnail
 - Local BPM and key analysis—no audio is uploaded to another service
+- Relative-major display whenever a minor key is detected
 - Finder shortcut after each successful download
 
 ## Requirements

@@ -125,8 +125,18 @@ struct ContentView: View {
                 }
 
                 HStack(spacing: 14) {
-                    resultTile(title: "TEMPO", value: formattedBPM(result.bpm), symbol: "metronome")
-                    resultTile(title: "KEY", value: result.musicalKey, symbol: "music.note")
+                    resultTile(
+                        title: "TEMPO",
+                        value: formattedBPM(result.bpm),
+                        subtitle: nil,
+                        symbol: "metronome"
+                    )
+                    resultTile(
+                        title: "KEY",
+                        value: result.musicalKey,
+                        subtitle: result.relativeMajorKey.map { "Relative major: \($0)" },
+                        symbol: "music.note"
+                    )
                 }
 
                 if let file = model.downloadedFile {
@@ -153,7 +163,7 @@ struct ContentView: View {
         }
     }
 
-    private func resultTile(title: String, value: String, symbol: String) -> some View {
+    private func resultTile(title: String, value: String, subtitle: String?, symbol: String) -> some View {
         HStack(spacing: 12) {
             Image(systemName: symbol)
                 .font(.title2)
@@ -166,11 +176,17 @@ struct ContentView: View {
                     .font(.title3.bold())
                     .lineLimit(1)
                     .minimumScaleFactor(0.75)
+                if let subtitle {
+                    Text(subtitle)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                }
             }
             Spacer(minLength: 0)
         }
         .padding(15)
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: .infinity, minHeight: 68)
         .background(Color(nsColor: .controlBackgroundColor), in: RoundedRectangle(cornerRadius: 10))
     }
 

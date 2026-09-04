@@ -42,6 +42,26 @@ final class MusicCoreTests: XCTestCase {
         XCTAssertEqual(result.bpm, 90, accuracy: 1.5)
     }
 
+    func testRelativeMajorForMinorKey() {
+        let analysis = MusicAnalysis(
+            bpm: 70,
+            musicalKey: "A minor",
+            tempoConfidence: 1,
+            keyConfidence: 1
+        )
+        XCTAssertEqual(analysis.relativeMajorKey, "C major")
+    }
+
+    func testRelativeMajorIsAbsentForMajorKey() {
+        let analysis = MusicAnalysis(
+            bpm: 120,
+            musicalKey: "D major",
+            tempoConfidence: 1,
+            keyConfidence: 1
+        )
+        XCTAssertNil(analysis.relativeMajorKey)
+    }
+
     private func syntheticClickTrack(bpm: Double) -> [Double] {
         let sampleRate = 11_025.0
         let duration = 45.0

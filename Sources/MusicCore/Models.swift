@@ -17,6 +17,18 @@ public struct MusicAnalysis: Sendable, Equatable {
         self.tempoConfidence = tempoConfidence
         self.keyConfidence = keyConfidence
     }
+
+    /// The relative major shares the same key signature as a detected minor key.
+    public var relativeMajorKey: String? {
+        guard musicalKey.hasSuffix(" minor") else { return nil }
+        let tonic = String(musicalKey.dropLast(" minor".count))
+        let pitchClassNames = [
+            "C", "C♯ / D♭", "D", "D♯ / E♭", "E", "F",
+            "F♯ / G♭", "G", "G♯ / A♭", "A", "A♯ / B♭", "B"
+        ]
+        guard let minorPitchClass = pitchClassNames.firstIndex(of: tonic) else { return nil }
+        return "\(pitchClassNames[(minorPitchClass + 3) % 12]) major"
+    }
 }
 
 public enum MusicUtilityError: LocalizedError {

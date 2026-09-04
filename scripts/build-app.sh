@@ -18,6 +18,7 @@ rm -rf "$APP_DIRECTORY"
 mkdir -p "$APP_DIRECTORY/Contents/MacOS" "$APP_DIRECTORY/Contents/Resources"
 cp "$PROJECT_DIRECTORY/.build/release/YouTubeMusicAnalyzer" "$APP_DIRECTORY/Contents/MacOS/YouTubeMusicAnalyzer"
 cp "$PROJECT_DIRECTORY/Resources/Info.plist" "$APP_DIRECTORY/Contents/Info.plist"
+cp "$PROJECT_DIRECTORY/Resources/AppIcon.icns" "$APP_DIRECTORY/Contents/Resources/AppIcon.icns"
 chmod +x "$APP_DIRECTORY/Contents/MacOS/YouTubeMusicAnalyzer"
 codesign --force --deep --sign - "$APP_DIRECTORY"
 
